@@ -23,4 +23,5 @@ E0()
 	4.1. Conseguir las coordenadas del espacio para la imagen secundaria en la plantilla
 	4.2. Editar la plantilla para que quede colocada sobre dicha coordenada
 5. Guardar imagen final
+
 EF(imagen_final)
