@@ -8,11 +8,17 @@ Sin embargo, debido a la completa aleatoriedad al momento de generar las imagene
 Este programa tiene como objetivo editar imagenes, o plantillas, añadiendo texto u otras imagenes con fines comedicos, aunque sin estar limitado a estos, de manera aleatoria. Selecciona una imagen base o plantilla de manera aleatoria, la cual después modificara añadiendo otras imagenes (las cuales varian en numero segun la plantilla elegida), las cuales tambien serán elegidas de manera procedural, siguiendo parametros dados por etiquetas para que la imagen divertida resultado del producto de estas tenga mas sentido. Estas etiquetas seran la base para el programa, pues permitiran al usuario decidir si se desea una imagen completamente aleatoria, sin sentido, o una mas convencional haciendo que las etiquetas de las imagenes combinadas coincidan.
 
 ### Intrucciones
-Simplemente descarga el archivo y correlo en una terminal con:
+Descarga el archivo generador.py junto a las carpetas con las imagenes, esto debido a que el script buscara esas carpetas y esas imagenes mediante sus nombres asi que no los cambies. El script y las carpetas deben de estar en el mismo folder. 
+El script usa Pillow, por lo que debe de ser instalado primero, afortunadamente, Pillow esta incluido en los paquetes de PIP, que a su vez viene incluido en la instalacion de python. Puedes instalarlo con este comando:
+
+	python -m pip install --upgrade Pillow
+
+Si eso no funciona, puedes consultar la pagina web de la instalación: https://pillow.readthedocs.io/en/latest/installation.html
+Una vez instalado todo, correr con el siguiente comando:
 
 	python generador.py
 
-o abrirlo en Thonny y dale al boton de Run (o F5)
+La imagen final será guardada en el folder en el que se encuentren el script y las carpetas de imagenes, por lo que recomiendo se guarden en una carpeta aparte para que la imagen no se pierda entre los archivos. La imagen generada será de nombre "newimage.png"
 
 ## Algoritmo
 El funcionamiento base del programa se basaria en lo siguiente
