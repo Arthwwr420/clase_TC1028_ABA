@@ -187,8 +187,8 @@ TMP3 = template("TEMP(003).png", (691, 495), (0, 99), "agresivo", 1)
 TMP4 = template("TEMP(004).png", (187, 125), (69, 152), "ser", 1)
 
 #codigo principal
-print("Generador de imagenes V0.1: Aun no funcional")
-print("Bienvenido al generador de imagenes chistosas, debido a... problemas... esta sera una simulacion, por lo que no se usaran imagenes")
+print("Generador de imagenes V0.2")
+print("Bienvenido al generador de imagenes chistosas")
 print("Por favor, ingresa el numero de imagenes que deseas generar")
 num_of_images = int(input())
 i = 0
