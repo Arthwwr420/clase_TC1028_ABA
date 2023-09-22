@@ -199,18 +199,15 @@ while i < num_of_images:
         inp = int(input())
         if inp == 1:
             f = random_image()
-            f.show()
             f.save("new image.png")
             done = True
         elif inp == 2:
             f = tags()
-            f.show()
             f.save("new image.png")
             done = True
         elif inp == 3:
             f = manual()
             if f != None:
-                f.show()
                 f.save("new image.png")
             done = True
         else:
