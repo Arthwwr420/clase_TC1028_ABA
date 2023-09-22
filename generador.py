@@ -183,8 +183,8 @@ SRC5 = source_image("SOURCE(005).png", "Molesto", "sinsentido")
 TMP0 = template("TEMP(0).png", (300, 300), (315, 180), "ser", 1)
 TMP1 = template("TEMP(001).PNG", (1080, 526), (0, 134), "ser", 1)
 TMP2 = template("TEMP(002).png", (1080, 815), (0, 168), "sinsentido", 1)
-TMP3 = template("TEMP(003).png", (691, 495), (0, 99), "agresivo")
-TMP4 = template("TEMP(004).png", (187, 125), (69, 152), "ser")
+TMP3 = template("TEMP(003).png", (691, 495), (0, 99), "agresivo", 1)
+TMP4 = template("TEMP(004).png", (187, 125), (69, 152), "ser", 1)
 
 #codigo principal
 print("Generador de imagenes V0.1: Aun no funcional")
