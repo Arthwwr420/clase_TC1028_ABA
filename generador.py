@@ -6,7 +6,7 @@ except:
     print('Pillow no encontrado, asegurate de haberlo instalado siguiendo las instrucciones del readme\n\
 Cerrando programa')
     quit()
-
+    
 """
 Generador de imagenes chistosas
 El programa final elige 2 de distintas carpetas para compararlas o juntarlas
@@ -14,18 +14,14 @@ Las imagenes son de 2 tipos: sources y plantillas o templates. La principal difr
 es que las sources estan pensadas para ser colocadas en las plantillas, por lo que las
 plantillas incluyen mas datos entre los que estan el numero de sources que admiten
 
-Esta version del programa incorpora plantillas con varios espacios de source images, 
-por lo que ahora la clase de template toma tuples que a su vez contienen los parametros
-para cada espacio de la imagen
-Hasta ahora, la unica plantilla con mas de un espacio es TMP5
+Esta version del programa permite al usuario elegir cuantas imagenes se generarán y de que
+manera se generarán, guardando la imagen final en el folder en el cual se encuentra este script
 """
 
 SOURCE_DIR = 'sources'
 TEMP_DIR = 'templates'
 n_of_src = 0
 n_of_temp = 0
-
-os.chdir(os.path.dirname(__file__))
 
 #source image: para guardar los datos, incluyendo tamaño y etiquetas, de una imagen
 class source_image:
@@ -34,9 +30,7 @@ class source_image:
     def __init__(self, image: str, tags: list):
         self.image = image
         self.tags = tags
-        os.chdir(SOURCE_DIR)
         self.img = Image.open(image)
-        os.chdir(os.path.dirname(__file__))
         global n_of_src
         n_of_src +=1
     
@@ -44,26 +38,24 @@ class source_image:
 #Plantilla: para guardar los datos, incluyendo etiquetas y numero de sources aceptadas
 class template:
     #funcion al crear nuevo objeto (plantilla),
-    #Toma el nombre de imagen. tamaño en pixeles de los espacios para la source, coordenadas para dichos espacios,
-    #una etiqueta por espacio y el numero de sources que puede contener la imagen
+    #Toma el nombre de imagen. tamaño en pixeles del espacio para la source, coordenadas para dicho espacio,
+    #una etiqueta y el numero de sources que puede contener la imagen
     def __init__(self, image: str, size: tuple, coor: tuple,  tag: tuple, source_capacity: int):
         self.image = image
         every = [size, coor, tag]
         for i in every:
             if len(i) != source_capacity:
                 raise Exception("Amount of iterates in tuples must be equal to source capacity ", i, len(i))
+            
         self.source_capacity = int(source_capacity)
         self.slot = []
         for i in range(self.source_capacity):
             self.slot.append(place(size[i], coor[i], tag[i]))
-        os.chdir(TEMP_DIR)
+
         self.img = Image.open(image)
-        os.chdir(os.path.dirname(__file__))
         global n_of_temp
         n_of_temp +=1
 
-#Clase de cada espacio de la plantilla
-#Toma el tamaño del espacio, coordenadas y etiqueta
 class place:
     def __init__(self, size: tuple, coor: tuple, tag: str):
         self.size = size
@@ -95,7 +87,7 @@ def combine(srcs: list, temp:template):
         print(x.image)
     return final
 
-#Comprueba etiquetas
+#Comprueba 
 def are_tags_same(src:source_image, slot:place):
     for x in src.tags:
         if x == slot.tag:
@@ -104,40 +96,38 @@ def are_tags_same(src:source_image, slot:place):
     
 #Toma 2 numeros y regresa la plantilla y SI referentes a dichos numeros
 def get_src_temp(src_num, tmp_num):
-    match src_num:
-        case 0:
-            s_img = SRC0
-        case 1:
-            s_img = SRC1
-        case 2:
-            s_img = SRC2
-        case 3:
-            s_img = SRC3
-        case 4:
-            s_img = SRC4
-        case 5:
-            s_img = SRC5
-        case _:
-            raise TypeError("Number given exceeds the number of Source Images or is less than 0")
-        
-    match tmp_num:
-        case 0:
-            temp = TMP0
-        case 1:
-            temp = TMP1
-        case 2:
-            temp = TMP2
-        case 3:
-            temp = TMP3
-        case 4:
-            temp = TMP4
-        case 5:
-            temp = TMP5
-        case _:
-            raise TypeError("Number given exceeds the number of Source Images or is less than 0")
+    if src_num == 0:
+        s_img = SRC0
+    elif src_num == 1:
+        s_img = SRC1
+    elif src_num == 2:
+        s_img = SRC2
+    elif src_num == 3:
+        s_img =  SRC3
+    elif src_num == 4:
+        s_img = SRC4
+    elif src_num == 5:
+        s_img = SRC5
+    else:
+        raise TypeError("Number given exceeds the number of Source Images or is less than 0")
+           
+    if tmp_num == 0:
+        temp = TMP0
+    elif tmp_num == 1:
+        temp = TMP1
+    elif tmp_num == 2:
+        temp = TMP2
+    elif tmp_num == 3:
+        temp = TMP3
+    elif tmp_num == 4:
+        temp = TMP4
+    elif tmp_num == 5:
+        temp = TMP5
+    else:
+        raise TypeError("Number given exceeds the number of Source Images or is less than 0")
+    
     return s_img, temp
 
-#vuelve a intentar conseguir una SI con etiqueta igual a la del espacio, regresa hasta que consiga una
 def try_again(slot:place):
     possible = False
     while not possible:
@@ -148,7 +138,6 @@ def try_again(slot:place):
         possible = are_tags_same(src_img, slot)
     if possible:
         return src_img
-        
 
 #Para imagenes aleatorias
 def random_image():
@@ -166,12 +155,13 @@ def random_image():
             sources.append(s_img)
         return combine(sources, temp)
     
+        
     
 #Para etiquetas
 def tags():
     RNG = random.randrange(0, n_of_src)
     RNG2 = random.randrange(0, n_of_temp)
-    src_img, tmp = get_src_temp(RNG, RNG2)
+    src_img, tmp = get_src_temp(RNG, 5)
     sources = [src_img]
     possible = False
 
@@ -183,17 +173,19 @@ def tags():
             possible = True
 
     else:
+        sources = list(range(tmp.source_capacity))
         for x in range(len(tmp.slot)):
             RNG = random.randrange(0, n_of_src)
-            possible = are_tags_same(s_img, tmp.slot[x])
+            possible = are_tags_same(src_img, tmp.slot[x])
             if possible:
                 sources[x] = src_img
             else:
                 src_img = try_again(tmp.slot[x])
                 sources[x] = src_img
             
-            s_img, t = get_src_temp(RNG, RNG2)
+            src_img, t = get_src_temp(RNG, RNG2)
             del t
+        possible=True
 
     if possible:
         return combine(sources, tmp)
