@@ -16,6 +16,8 @@ plantillas incluyen mas datos entre los que estan el numero de sources que admit
 
 Esta version del programa permite al usuario elegir cuantas imagenes se generarán y de que
 manera se generarán, guardando la imagen final en el folder en el cual se encuentra este script
+El avance de matrices ya estaba listo, pues las clases de imagenes toman tuplas de tuplas
+Esta version no usa OS para evitar problemas
 """
 
 SOURCE_DIR = 'sources'
@@ -30,7 +32,11 @@ class source_image:
     def __init__(self, image: str, tags: list):
         self.image = image
         self.tags = tags
-        self.img = Image.open(image)
+        try:
+            self.img = Image.open(image)
+        except:
+            print('No se encontro la imagen ', image, 'Asegurate de que este en el mismo folder que el script')
+            quit()
         global n_of_src
         n_of_src +=1
     
@@ -52,7 +58,11 @@ class template:
         for i in range(self.source_capacity):
             self.slot.append(place(size[i], coor[i], tag[i]))
 
-        self.img = Image.open(image)
+        try:
+            self.img = Image.open(image)
+        except:
+            print('No se encontro la imagen ', image, 'Asegurate de que este en el mismo folder que el script')
+            quit()
         global n_of_temp
         n_of_temp +=1
 
