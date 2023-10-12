@@ -306,20 +306,17 @@ while i < num_of_images:
         inp = int(input())
         if inp == 1:
             f = random_image()
-            f.show()
             name = str("new image("+ str(i) + ").png")
             f.save(name)
             done = True
         elif inp == 2:
             f = tags()
-            f.show()
             name = str("new image("+ str(i) + ").png")
             f.save(name)
             done = True
         elif inp == 3:
             f = manual()
             if f != None:
-                f.show()
                 name = str("new image("+ str(i) + ").png")
                 f.save(name)
             done = True
