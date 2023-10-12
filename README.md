@@ -25,10 +25,11 @@ Una vez instalado todo, correr con el siguiente comando:
 Sigue las instrucciones dadas por el programa
 Las imagenes finales será guardada en el folder en el que se encuentren el script y las carpetas de imagenes, por lo que recomiendo que estos se guarden en una carpeta aparte para que la imagen no se pierda entre los archivos o  se instale directamente el ZIP. La imagen generada será de nombre "new image(numero de la imagen).png".
 
-#### Nota: Se generara el numero de imagenes que se desee, pero al volver a correr el archivo las imagenes generadas serán sobreescritas con las nuevas
+#### Nota: Se generara el numero de imagenes que se desee, pero al volver a correr el archivo las imagenes generadas serán sobreescritas con las nuevas4
+En esta version se incluye generadorSOS, en caso de que no funcione generador.py por problemas con Pillow, este archivo esta ahi para que se use sin usar esta librería.
 
 ### Avance:
-En este avance se incorpora el uso de listas para plantillas con mas de un espacio para source image.
+En este avance se incorpora el generador SOS, ademas de acomodarse a las normas PEP8
 
 ## Algoritmo
 El funcionamiento base del programa se basaria en lo siguiente
@@ -47,3 +48,4 @@ E0()
 	4.2. Editar la plantilla para que quede colocada sobre dicha coordenada
 5. Guardar imagen final
 EF(imagen_final)
+
