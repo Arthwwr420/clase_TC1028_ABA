@@ -2,16 +2,17 @@ Sub-Competencia: Separa el código en funciones pequeñas reusables, haciendo us
 
 Error original: no compila
 
-Cambio realizado: se añadio archivo SOS sin la libreria que causaba el problema
+Cambio realizado: Se arregloo el error que hacia que no compile
 
-Líneas de código donde se ve la corrección: en el archivo generadorSOS.py, las siguientes lineas tienen funciones:
+Líneas de código donde se ve la corrección: en el archivo generador.py, las siguientes lineas tienen funciones:
 80: def combine(srcs:list, temp:template):
+110: def are_tags_same(src:source_image, slot:place):
 
 Sub competencia: aplica estructuras cíclicas para resolver un problema de manera eficiente (avance 5)
 
 Error original: no compila
 
-Cambio realizado: Se añadio un archivo SOS sin la libreria que ocasionaba problemas
+Cambio realizado: Se arregloo el error que hacia que no compile
 
 Lineas de codigo donde se ve la correccion: en el archivo generadorSOS.py, las siguientes lineas tienen ciclos while:
 161: while not possible:
@@ -21,7 +22,7 @@ Sub-Competencia:  usa la forma más a apropiada al problema para guardar los dat
 
 Error original: no compila
 
-Cambio realizado: se añadio archivo SOS sin la libreria que causaba el problema
+Cambio realizado: Se arregloo el error que hacia que no compile
 
 Líneas de código donde se ve la corrección: en el archivo generadorSOS.py, las siguientes lineas tienen ciclos for y listas:
 87: for nlot in temp.slot
