@@ -2,7 +2,7 @@ Sub-Competencia: Separa el código en funciones pequeñas reusables, haciendo us
 
 Error original: no compila
 
-Cambio realizado: Se arregloo el error que hacia que no compile
+Cambio realizado: Se arreglo el error que hacia que no compile
 
 Líneas de código donde se ve la corrección: en el archivo generador.py, las siguientes lineas tienen funciones:
 80: def combine(srcs:list, temp:template):
@@ -12,9 +12,9 @@ Sub competencia: aplica estructuras cíclicas para resolver un problema de maner
 
 Error original: no compila
 
-Cambio realizado: Se arregloo el error que hacia que no compile
+Cambio realizado: Se arreglo el error que hacia que no compile
 
-Lineas de codigo donde se ve la correccion: en el archivo generadorSOS.py, las siguientes lineas tienen ciclos while:
+Lineas de codigo donde se ve la correccion: en el archivo generador.py, las siguientes lineas tienen ciclos while:
 161: while not possible:
 301: while i < num_of_images:
 
@@ -22,8 +22,8 @@ Sub-Competencia:  usa la forma más a apropiada al problema para guardar los dat
 
 Error original: no compila
 
-Cambio realizado: Se arregloo el error que hacia que no compile
+Cambio realizado: Se arreglo el error que hacia que no compile
 
-Líneas de código donde se ve la corrección: en el archivo generadorSOS.py, las siguientes lineas tienen ciclos for y listas:
+Líneas de código donde se ve la corrección: en el archivo generador.py, las siguientes lineas tienen ciclos for y listas:
 87: for nlot in temp.slot
 105: for x in srcs:
