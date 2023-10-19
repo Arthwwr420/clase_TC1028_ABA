@@ -1,12 +1,11 @@
+#Bibliotecas
 import random
-try:
-    from PIL import Image
-except:
-    print('Pillow no encontrado, asegurate de haberlo instalado siguiendo las\
-instrucciones del readme\n\
-Si no jala, usa el archivo "generador SOS", que no usa Pillow\n\
-Cerrando programa')
-    quit()
+"""
+python: https://docs.python.org/3/library/random.html
+Esta bibloteca se hace cargo de generar numeros aleatorios para las imagenes
+mediante random.randrange
+"""
+
     
 """
 Generador de imagenes chistosas
@@ -16,9 +15,9 @@ difrencia es que las sources estan pensadas para ser colocadas en las
 plantillas, por lo que las plantillas incluyen mas datos entre los que 
 estan el numero de sources que admiten
 
-Esta version del programa permite al usuario elegir cuantas imagenes se 
-generarán y de que manera se generarán, guardando la imagen final en el
-folder en el cual se encuentra este script
+Esta version del programa es en caso de que no funciona Pillow, por lo
+que no guardara las imagenes y se trata de solo una simulacion, pero al menos
+compila (:
 """
 
 SOURCE_DIR = 'sources'
@@ -29,12 +28,13 @@ n_of_temp = 0
 class source_image:
 #source image: para guardar los datos, incluyendo tamaño y etiquetas, de una
 #imagen
-    def __init__(self, image: str, tags: list):
+    def __init__(self, image: str, tags: list, size:tuple):
         """funcion al crear nuevo objeto, toma el nombre de imagen y una 
         etiqueta, abre la imagen a partir del nombre"""
         self.image = image
         self.tags = tags
-        self.img = Image.open(image)
+        self.size = size 
+        self.img = None
         global n_of_src
         n_of_src +=1
     
@@ -60,7 +60,7 @@ class template:
         for i in range(self.source_capacity):
             self.slot.append(place(size[i], coor[i], tag[i]))
 
-        self.img = Image.open(image)
+        self.img = None
         global n_of_temp
         n_of_temp +=1
 
@@ -85,18 +85,15 @@ Toma una lista con sources y una plantilla
     final =  temp.img
     i = 0
     for slotn in temp.slot:
-        diference = (slotn.size[0] != srcs[i].img.size[0] and slotn.size[1]
-                      != srcs[i].img.size[1])
+        diference = (slotn.size[0] != srcs[i].size[0] and slotn.size[1]
+                      != srcs[i].size[1])
         if(diference):
             new_size = slotn.size
-            resize = srcs[i].img.resize(slotn.size)
-            final.paste(resize, slotn.coor)
             print("Redimension necesaria. El tamaño de la source image ahora\
  es", new_size)
         
         else:
             print("No hubo necesidad de redimension")
-            final.paste(srcs[i].img, slotn.coor)
         i +=1
 
     print("Imagenes combiadas:")
@@ -169,9 +166,10 @@ def try_again(slot:place):
 
 #Para imagenes aleatorias
 def random_image():
-    """Genera 2 numeros para obtener una source y una plantilla aleatorias
-    Si la plantilla tiene mas de un espacio, genera mas numeros para conseguir
-    sources que guarda en una lista
+    """Genera 2 numeros mediante random.randrange() para obtener una source 
+    y una plantilla aleatorias
+    Si la plantilla tiene mas de un espacio, genera mas numeros para 
+    conseguir sources que guarda en una lista
     Regresa la combinacion de ambas imagenes mediante la funcion combine()
     dando como parametros la lista de sources y la plantilla"""
     RNG = random.randrange(0, n_of_src)
@@ -275,12 +273,17 @@ def manual():
         return
 
 #definicion de cada imagen
-SRC0 = source_image("SOURCE(0).png", ["anime", "desamparo", "cara"])
-SRC1 = source_image("SOURCE(001).png", ["animal", "ser", "cara"])
-SRC2 = source_image("SOURCE(002).png", ["ser", "sinsentido"])
-SRC3 = source_image("SOURCE(003).png", ["feliz", "ser"])
-SRC4 = source_image("SOURCE(004).PNG", ["agresivo", "ser", "cara"])
-SRC5 = source_image("SOURCE(005).png", ["molesto", "sinsentido", "cara"])
+SRC0 = source_image("SOURCE(0).png", ["anime", "desamparo", "cara"], 
+                    (225, 225))
+SRC1 = source_image("SOURCE(001).png", ["animal", "ser", "cara"], 
+                    (626, 626))
+SRC2 = source_image("SOURCE(002).png", ["ser", "sinsentido"], 
+                    (1080, 808))
+SRC3 = source_image("SOURCE(003).png", ["feliz", "ser"], (600, 595))
+SRC4 = source_image("SOURCE(004).PNG", ["agresivo", "ser", "cara"], 
+                    (390, 340))
+SRC5 = source_image("SOURCE(005).png", ["molesto", "sinsentido", "cara"], 
+                    (402, 377))
 TMP0 = template("TEMP(0).png", ((300, 300),), ((315, 180),), ("ser",), 1)
 TMP1 = template("TEMP(001).PNG", ((1080, 526),), ((0, 134),), ("ser",), 1)
 TMP2 = template("TEMP(002).png", ((1080, 815),), ((0, 168),), ("sinsentido",)
@@ -294,8 +297,8 @@ TMP5 = template("TEMP(005).png", ((100, 115), (76, 92), (68, 80), (72, 85),
 
 #codigo principal
 print("Generador de imagenes V0.4")
-print("Bienvenido al generador de imagenes chistosas")
-print("Por favor, ingresa el numero de imagenes que deseas generar")
+print("Bienvenido al generador de imagenes chistosas (version de emergencia)")
+print("Por favor, ingresa el numero de imagenes que deseas 'generar'")
 num_of_images = int(input())
 i = 0
 while i < num_of_images:
@@ -307,18 +310,20 @@ while i < num_of_images:
         if inp == 1:
             f = random_image()
             name = str("new image("+ str(i) + ").png")
-            f.save(name)
+            print("Imagen 'guardada' como ", name)
+            
             done = True
         elif inp == 2:
             f = tags()
             name = str("new image("+ str(i) + ").png")
-            f.save(name)
+            print("Imagen 'guardada' como ", name)
+            
             done = True
         elif inp == 3:
             f = manual()
-            if f != None:
-                name = str("new image("+ str(i) + ").png")
-                f.save(name)
+            name = str("new image("+ str(i) + ").png")
+            print("Imagen 'guardada' como ", name)
+            
             done = True
         else:
             print("Tu respuesta no esta incluida en la lista de posibles\
